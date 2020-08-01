@@ -1,0 +1,8 @@
+// navbar
+$navbar-background-height: 40px;
+$sidebar-width: 220px;
+
+:export {
+  navbar-background-height: $navbar-background-height;
+  sidebar-width: $sidebar-width
+}
