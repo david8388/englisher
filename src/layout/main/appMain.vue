@@ -2,18 +2,20 @@
   <div class="main">
     <sidebar />
     <div class="content-wrapper">
-      Hiiii
+      <dashboard></dashboard>
     </div>
   </div>
 </template>
 
 <script>
 import Sidebar from './sidebar';
+import Dashboard from '../../views/dashboard.vue';
 
 export default {
   name: 'AppMain',
   components: {
-    Sidebar
+    Sidebar,
+    Dashboard
   }
 }
 </script>
