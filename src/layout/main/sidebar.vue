@@ -25,7 +25,7 @@ export default {
   left: 0;
   color: #FFF;
   background-color: #FFF;
-
+  box-shadow: inset -1px 0 0 $divider;
   & .sidebar-inner-scroll {
     height: 100%;
     width: 100%;

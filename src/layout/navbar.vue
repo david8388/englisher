@@ -22,6 +22,7 @@ export default {
 .navbar-background {
   min-height: $navbar-background-height;
   background: black;
+  border-bottom: 1px solid $divider;
   & .navbar-title {
     font-size: 18px;
     color: #FFF;
