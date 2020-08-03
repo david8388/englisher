@@ -1,9 +1,11 @@
 <template>
   <div class="sidebar-container">
     <div class="sidebar-inner-scroll">
+      <router-link to="/">
         <ul class="sidebar-navigation">
           <li>Dashboard</li>
         </ul>
+      </router-link>
     </div>
   </div>
 </template>
