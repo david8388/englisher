@@ -1,11 +1,21 @@
 <template>
   <div class="sidebar-container">
     <div class="sidebar-inner-scroll">
-      <router-link to="/">
         <ul class="sidebar-navigation">
-          <li>Dashboard</li>
+          <li>
+            <router-link
+              to="/"
+              class="sidebar-shortcuts-tree"
+            >
+              <div class="icon-container">
+                <i class="fa fa-car" />
+              </div>
+              <span>
+                Dashboard
+              </span>
+            </router-link>
+          </li>
         </ul>
-      </router-link>
     </div>
   </div>
 </template>
@@ -37,7 +47,16 @@ export default {
   & .sidebar-navigation {
     color: #707070;
     padding-left: 0;
-    list-style: none
+    list-style: none;
+    & .sidebar-shortcuts-tree {
+      display: flex;
+      align-items: center;
+      padding: 12px 16px;
+      color: #707070;
+      & .icon-container {
+        margin-right: 8px;
+      }
+    }
   }
 }
 
