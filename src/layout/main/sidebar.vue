@@ -8,7 +8,7 @@
               class="sidebar-shortcuts-tree"
             >
               <div class="icon-container">
-                <i class="fa fa-car" />
+                <i class="fas fa-tachometer-alt" />
               </div>
               <span>
                 Dashboard
@@ -36,12 +36,13 @@ export default {
   height: 100%;
   left: 0;
   color: #FFF;
-  background-color: #FFF;
+  background-color: #FAFAFA;
   box-shadow: inset -1px 0 0 $divider;
   & .sidebar-inner-scroll {
     height: 100%;
     width: 100%;
     overflow: auto;
+    overflow-y: scroll;
   }
 
   & .sidebar-navigation {
