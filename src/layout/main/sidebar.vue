@@ -4,8 +4,10 @@
         <ul class="sidebar-navigation">
           <li>
             <router-link
+              @click="setActive('Dashboard')"
               to="/"
               class="sidebar-shortcuts-tree"
+              :class="{active: isActive('Dashboard')}"
             >
               <div class="icon-container">
                 <i class="fas fa-tachometer-alt" />
@@ -21,8 +23,29 @@
 </template>
 
 <script>
+import { reactive } from 'vue';
+
 export default {
-  name: 'Sidebar'
+  name: 'Sidebar',
+  setup() {
+
+    const activeItem = reactive({
+      name: 'Dashboard'
+    })
+
+    function setActive(menuItem) {
+      activeItem.name = menuItem
+    }
+
+    function isActive(menuItem) {
+      return activeItem.name === menuItem
+    }
+
+    return {
+      setActive,
+      isActive
+    }
+  }
 }
 </script>
 
@@ -36,13 +59,12 @@ export default {
   height: 100%;
   left: 0;
   color: #FFF;
-  background-color: #FAFAFA;
+  background-color: #F4F5F7;
   box-shadow: inset -1px 0 0 $divider;
   & .sidebar-inner-scroll {
     height: 100%;
     width: 100%;
     overflow: auto;
-    overflow-y: scroll;
   }
 
   & .sidebar-navigation {
@@ -57,6 +79,10 @@ export default {
       & .icon-container {
         margin-right: 8px;
       }
+    }
+    & .active {
+      background-color: rgba(0, 0, 0, 0.04);
+      color: #0052CC;
     }
   }
 }
