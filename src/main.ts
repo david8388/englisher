@@ -9,9 +9,12 @@ import 'ag-grid/dist/styles/ag-theme-balham.css';
 import '@fortawesome/fontawesome-free/css/all.min.css'
 
 import Card from './components/Card.vue';
+import Chart from './components/Chart.vue';
+
 
 const app = createApp(App)
 
 app.use(router)
 app.component('card', Card)
+app.component('chart', Chart)
 app.mount('#app')
