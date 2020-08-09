@@ -1,20 +1,41 @@
 <template>
   <div>
-    <div class="card-deck">
-      <div
-        class="card w-25"
-        v-for="(com, index) in components"
-        :key="index"
-      >
-        <card
-          :title="com.title"
-          :text="com.text"
-        />
+    <form @submit="save" @reset="reset">
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Vocabulary</label>
+        <div class="col-sm-10">
+          <input
+            class="form-control"
+            placeholder="tree"
+            v-model="form.vocabulary"
+          >
+        </div>
       </div>
-    </div>
-    <chart
-      :datasets="datasets"
-    />
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Expression</label>
+        <div class="col-sm-10">
+          <input
+            class="form-control"
+            placeholder="(n)樹"
+            v-model="form.expression"
+          >
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Example</label>
+        <div class="col-sm-10">
+          <textarea
+            class="form-control"
+            rows="3"
+            placeholder="He is making a clothes tree"
+            v-model="form.example"
+          />
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary mb-2">Save</button>
+      <button type="reset" class="btn btn-primary mb-2">Reset</button>
+    </form>
+    <div id="myGrid" style="height: 300px;" class="ag-theme-balham"></div>
   </div>
 </template>
 
@@ -24,20 +45,6 @@ import { Grid } from "ag-grid/main";
 
 export default {
   setup() {
-    const components = reactive([
-      {
-        title: 'Total Vocabulary',
-        text: 60
-      },
-      {
-        title: 'Created Today',
-        text: 10
-      },
-      {
-        title: 'Reviewed Today',
-        text: 8
-      }
-    ])
     const form = reactive({
       vocabulary: '',
       expression: '',
@@ -80,62 +87,6 @@ export default {
       onRowValueChanged: onRowValueChanged
     };
 
-    const datasets = reactive([
-          {
-            data: [
-              {
-                x: new Date('2020-08-08'),
-                y: Math.random()* 100
-              },
-              {
-                x: new Date('2020-08-07'),
-                y: Math.random()* 100
-              },
-              {
-                x: new Date('2020-08-06'),
-                y: Math.random()* 100
-              },
-              {
-                x: new Date('2020-08-05'),
-                y: Math.random()* 100
-              },
-              {
-                x: new Date('2020-08-04'),
-                y: Math.random()* 100
-              }
-            ],
-            label: "Africa",
-            borderColor: "#3e95cd",
-            fill: false
-          },
-          {
-            data: [
-              {
-                x: new Date('2020-08-08'),
-                y: Math.random()* 100
-              },
-              {
-                x: new Date('2020-08-07'),
-                y: Math.random()* 100
-              },
-              {
-                x: new Date('2020-08-06'),
-                y: Math.random()* 100
-              },
-              {
-                x: new Date('2020-08-05'),
-                y: Math.random()* 100
-              },
-              {
-                x: new Date('2020-08-04'),
-                y: Math.random()* 100
-              }
-            ],
-            label: "Africa2",
-            borderColor: "#3e95cd",
-            fill: false
-          }
-        ])
     onMounted(() => {
       data.list = []
       gridOptions.rowData = []
@@ -174,9 +125,7 @@ export default {
       form,
       reset,
       save,
-      data,
-      components,
-      datasets
+      data
     }
   }
 }
