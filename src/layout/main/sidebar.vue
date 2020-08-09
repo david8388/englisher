@@ -17,6 +17,21 @@
               </span>
             </router-link>
           </li>
+          <li>
+            <router-link
+              @click="setActive('Vocabulary')"
+              to="/vocabulary"
+              class="sidebar-shortcuts-tree"
+              :class="{active: isActive('Vocabulary')}"
+            >
+              <div class="icon-container">
+                <i class="fas fa-book" />
+              </div>
+              <span>
+                Vocabulary
+              </span>
+            </router-link>
+          </li>
         </ul>
     </div>
   </div>
