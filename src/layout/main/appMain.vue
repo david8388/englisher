@@ -2,20 +2,28 @@
   <div class="main">
     <sidebar />
     <div class="content-wrapper">
-      <dashboard></dashboard>
+      <div class="content-fluid content-width">
+        <router-view :key="path" />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import { computed } from 'vue'
 import Sidebar from './sidebar';
-import Dashboard from '../../views/dashboard.vue';
 
 export default {
   name: 'AppMain',
   components: {
-    Sidebar,
-    Dashboard
+    Sidebar
+  },
+  setup() {
+    const path = computed(() => sessionStorage.getItem('activeItem') || '')
+
+    return {
+      path
+    }
   }
 }
 </script>
@@ -26,9 +34,17 @@ export default {
 .main {
   padding-left: $sidebar-width;
   .content-wrapper {
-    background-color: #EAEAEA;
-    //width: 100%;
+    background-color: #FFF;
     margin-top: $navbar-background-height;
+  }
+  .content-fluid {
+    margin-right: auto;
+    margin-left: auto;
+    width: 100%;
+    padding: 0 16px;
+  }
+  .content-width {
+    max-width: 1280px;
   }
 }
 

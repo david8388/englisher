@@ -49,11 +49,13 @@ export default {
     })
 
     function setActive(menuItem) {
+      sessionStorage.setItem('activeItem', menuItem)
       activeItem.name = menuItem
     }
 
     function isActive(menuItem) {
-      return activeItem.name === menuItem
+      const active = sessionStorage.getItem('activeItem') || 'Dashboard'
+      return active === menuItem
     }
 
     return {
