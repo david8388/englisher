@@ -1,8 +1,11 @@
 <template>
-  <div class="sidebar-container">
+  <div
+    class="sidebar-container"
+    :class="{'sidebar-collapsed': isCollapsed}"
+  >
     <div class="sidebar-inner-scroll">
         <ul class="sidebar-navigation">
-          <li>
+          <li data-toggle="tooltip" data-placement="right" title="Dashboard">
             <router-link
               @click="setActive('Dashboard')"
               to="/"
@@ -12,12 +15,10 @@
               <div class="icon-container">
                 <i class="fas fa-tachometer-alt" />
               </div>
-              <span>
-                Dashboard
-              </span>
+              <span v-if="!isCollapsed">Dashboard</span>
             </router-link>
           </li>
-          <li>
+          <li data-toggle="tooltip" data-placement="right" title="Vocabulary">
             <router-link
               @click="setActive('Vocabulary')"
               to="/vocabulary"
@@ -27,10 +28,27 @@
               <div class="icon-container">
                 <i class="fas fa-book" />
               </div>
-              <span>
-                Vocabulary
-              </span>
+              <span v-if="!isCollapsed">Vocabulary</span>
             </router-link>
+          </li>
+          <li
+            class="toggle-sidebar-button"
+            :class="{'sidebar-collapsed': isCollapsed}"
+            @click="toggleSidebar"
+          >
+            <div class="sidebar-shortcuts-tree">
+              <div class="icon-container">
+                <i
+                  v-if="!isCollapsed"
+                  class="fas fa-arrow-left"
+                />
+                <i
+                  v-else
+                  class="fas fa-arrow-right"
+                />
+                <span v-if="!isCollapsed">&nbsp;Collapse sidebar</span>
+              </div>
+            </div>
           </li>
         </ul>
     </div>
@@ -38,7 +56,7 @@
 </template>
 
 <script>
-import { reactive } from 'vue';
+import { reactive, ref, computed } from 'vue';
 
 export default {
   name: 'Sidebar',
@@ -47,6 +65,10 @@ export default {
     const activeItem = reactive({
       name: 'Dashboard'
     })
+
+    const isToggle = ref(true)
+
+    const isCollapsed = computed(() => isToggle.value)
 
     function setActive(menuItem) {
       sessionStorage.setItem('activeItem', menuItem)
@@ -58,9 +80,15 @@ export default {
       return active === menuItem
     }
 
+    function toggleSidebar() {
+      isToggle.value = !isToggle.value
+    }
+
     return {
       setActive,
-      isActive
+      isActive,
+      toggleSidebar,
+      isCollapsed
     }
   }
 }
@@ -78,12 +106,12 @@ export default {
   color: #FFF;
   background-color: #F4F5F7;
   box-shadow: inset -1px 0 0 $divider;
+  transition: width 0.3s, left 0.3s;
   & .sidebar-inner-scroll {
     height: 100%;
     width: 100%;
     overflow: auto;
   }
-
   & .sidebar-navigation {
     color: #707070;
     padding-left: 0;
@@ -97,11 +125,25 @@ export default {
         margin-right: 8px;
       }
     }
+    & .toggle-sidebar-button {
+      bottom: 0;
+      position: fixed;
+      border-top: 1px solid #dbdbdb;
+      width: $sidebar-width - 1;
+      cursor: pointer;
+    }
+    & .sidebar-collapsed {
+      width: $sidebar-collapsed-width;;
+    }
     & .active {
       background-color: rgba(0, 0, 0, 0.04);
       color: #0052CC;
     }
   }
+}
+
+.sidebar-collapsed {
+  width: $sidebar-collapsed-width;
 }
 
 

@@ -4,9 +4,11 @@ $divider: #DBDBDB;
 // navbar
 $navbar-background-height: 40px;
 $sidebar-width: 220px;
+$sidebar-collapsed-width: 50px;
 
 :export {
   divider: $divider;
   navbar-background-height: $navbar-background-height;
-  sidebar-width: $sidebar-width
+  sidebar-width: $sidebar-width;
+  sidebar-collapsed-width: $sidebar-collapsed-width;
 }
