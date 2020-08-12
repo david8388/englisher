@@ -24,18 +24,29 @@ import { Grid } from "ag-grid/main";
 
 export default {
   setup() {
+    let total = 0
+    let created = 0
+
+    Object.keys(localStorage).forEach(key => {
+      if(key == +key) {
+        total += 1
+      }
+      if (new Date().toDateString() === new Date(key).toDateString()) {
+        created += 1
+      }
+    })
     const components = reactive([
       {
         title: 'Total Vocabulary',
-        text: 60
+        text: total
       },
       {
         title: 'Created Today',
-        text: 10
+        text: created
       },
       {
         title: 'Reviewed Today',
-        text: 8
+        text: 0
       }
     ])
     const form = reactive({
@@ -178,6 +189,9 @@ export default {
       components,
       datasets
     }
+  },
+  isNumber(val: any) {
+    return typeof val === "number" && !isNaN(val)
   }
 }
 </script>
