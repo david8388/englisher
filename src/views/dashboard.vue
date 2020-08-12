@@ -31,7 +31,8 @@ export default {
       if(key == +key) {
         total += 1
       }
-      if (new Date().toDateString() === new Date(key).toDateString()) {
+
+      if (new Date().toDateString() === new Date(+key).toDateString()) {
         created += 1
       }
     })
