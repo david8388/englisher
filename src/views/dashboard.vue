@@ -20,16 +20,31 @@
 
 <script lang="ts">
 import { reactive, onMounted, ref } from 'vue';
-import { Grid } from "ag-grid/main";
+import { Grid } from 'ag-grid/main'
+import moment from 'moment'
 
 export default {
   setup() {
     let total = 0
     let created = 0
+    const createdHistory = [0,0,0,0,0]
+    const today = moment(new Date())
 
     Object.keys(localStorage).forEach(key => {
       if(key == +key) {
         total += 1
+        const diff = today.diff(new Date(+key), 'days')
+        if (diff === 0) {
+          createdHistory[0] += 1
+        } else if (diff === 1) {
+          createdHistory[1] += 1
+        } else if (diff === 2) {
+          createdHistory[2] += 1
+        } else if (diff === 3) {
+          createdHistory[3] += 1
+        } else if (diff === 4) {
+          createdHistory[4] += 1
+        }
       }
 
       if (new Date().toDateString() === new Date(+key).toDateString()) {
@@ -96,54 +111,27 @@ export default {
           {
             data: [
               {
-                x: new Date('2020-08-08'),
-                y: Math.random()* 100
+                x: moment(),
+                y: createdHistory[0]
               },
               {
-                x: new Date('2020-08-07'),
-                y: Math.random()* 100
+                x: moment().subtract(1, 'days'),
+                y: createdHistory[1]
               },
               {
-                x: new Date('2020-08-06'),
-                y: Math.random()* 100
+                x: moment().subtract(2, 'days'),
+                y: createdHistory[2]
               },
               {
-                x: new Date('2020-08-05'),
-                y: Math.random()* 100
+                x: moment().subtract(3, 'days'),
+                y: createdHistory[3]
               },
               {
-                x: new Date('2020-08-04'),
-                y: Math.random()* 100
+                x: moment().subtract(4, 'days'),
+                y: createdHistory[4]
               }
             ],
-            label: "Africa",
-            borderColor: "#3e95cd",
-            fill: false
-          },
-          {
-            data: [
-              {
-                x: new Date('2020-08-08'),
-                y: Math.random()* 100
-              },
-              {
-                x: new Date('2020-08-07'),
-                y: Math.random()* 100
-              },
-              {
-                x: new Date('2020-08-06'),
-                y: Math.random()* 100
-              },
-              {
-                x: new Date('2020-08-05'),
-                y: Math.random()* 100
-              },
-              {
-                x: new Date('2020-08-04'),
-                y: Math.random()* 100
-              }
-            ],
-            label: "Africa2",
+            label: 'Created',
             borderColor: "#3e95cd",
             fill: false
           }
