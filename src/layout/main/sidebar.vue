@@ -66,7 +66,7 @@ export default {
       name: 'Dashboard'
     })
 
-    const isToggle = ref(true)
+    const isToggle = ref(false)
 
     const isCollapsed = computed(() => isToggle.value)
 
