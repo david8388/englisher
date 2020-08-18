@@ -1,5 +1,15 @@
 <template>
-  <canvas ref="chart"/>
+  <div class="card card-wrapper">
+    <div class="card-header">
+      {{ title }}
+    </div>
+    <div class="card-body">
+      <canvas
+        ref="chart"
+        height="150"
+      />
+    </div>
+  </div>
 </template>
 
 <script>
@@ -8,9 +18,15 @@ import Chart from 'chart.js';
 export default {
   name: 'Chart',
   props: {
-    datasets: Array,
-    default() {
-      return []
+    title: {
+      type: String,
+      default: ''
+    },
+    datasets: {
+      type: Array,
+      default() {
+        return []
+      }
     }
   },
   mounted() {
@@ -33,3 +49,10 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.card-wrapper {
+  margin-bottom: 25px;
+  margin-right: 0px;
+}
+</style>
