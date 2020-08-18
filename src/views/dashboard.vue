@@ -2,7 +2,7 @@
   <div>
     <div class="card-deck">
       <div
-        class="card w-25"
+        class="w-25"
         v-for="(com, index) in components"
         :key="index"
       >
@@ -12,9 +12,18 @@
         />
       </div>
     </div>
-    <chart
-      :datasets="datasets"
-    />
+    <div class="card-deck">
+      <chart
+        class="w-50"
+        :title="'created and reviewed by day'"
+        :datasets="datasets"
+      />
+      <chart
+        class="w-50"
+        :title="'listened by day'"
+        :datasets="datasets"
+      />
+    </div>
   </div>
 </template>
 
@@ -63,6 +72,10 @@ export default {
       {
         title: 'Reviewed Today',
         text: 0
+      },
+      {
+        title: 'Listened Today',
+        text: '1 min'
       }
     ])
     const form = reactive({
