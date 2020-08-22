@@ -2,7 +2,7 @@
   <div class="main">
     <sidebar />
     <div class="content-wrapper">
-      <div class="content-fluid content-width">
+      <div class="content-fluid">
         <router-view :key="path" />
       </div>
     </div>
@@ -41,10 +41,7 @@ export default {
     margin-right: auto;
     margin-left: auto;
     width: 100%;
-    padding: 0 16px;
-  }
-  .content-width {
-    max-width: 1280px;
+    padding: 32px;
   }
 }
 
