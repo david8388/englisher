@@ -29,7 +29,7 @@
             style="float: right;margin-top:-8px;"
             @click="isClick = !isClick"
           >
-            Back to the front!
+            Back to the question!
           </button>
         </div>
         <div class="card-body">
