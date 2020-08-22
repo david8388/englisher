@@ -31,6 +31,19 @@
               <span v-if="!isCollapsed">Vocabulary</span>
             </router-link>
           </li>
+          <li data-toggle="tooltip" data-placement="right" title="Review">
+            <router-link
+              @click="setActive('Review')"
+              to="/review"
+              class="sidebar-shortcuts-tree"
+              :class="{active: isActive('Review')}"
+            >
+              <div class="icon-container">
+                <i class="fas fa-tasks" />
+              </div>
+              <span v-if="!isCollapsed">Review</span>
+            </router-link>
+          </li>
           <li
             class="toggle-sidebar-button"
             :class="{'sidebar-collapsed': isCollapsed}"

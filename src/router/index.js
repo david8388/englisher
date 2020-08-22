@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Dashboard from '../views/dashboard.vue';
 import Vocabulary from '../views/vocabulary.vue';
+import Review from '../views/review.vue';
 
 const routerHistory = createWebHistory()
 
@@ -14,6 +15,10 @@ const router = createRouter({
     {
       path: '/vocabulary',
       component: Vocabulary
+    },
+    {
+      path: '/review',
+      component: Review
     }
   ]
 })
