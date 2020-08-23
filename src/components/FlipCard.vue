@@ -17,7 +17,12 @@
         </div>
         <div class="card-body">
          <p class="card-text text-center">
-           {{ question }}
+          <i
+           class="fas fa-volume-up"
+           @click="speak"
+          >
+          </i>
+          {{ question }}
          </p>
         </div>
       </div>
@@ -44,6 +49,7 @@
 
 <script>
 import { ref } from 'vue';
+import Speech from 'speak-tts'
 
 export default {
   name: 'FlipCard',
@@ -57,11 +63,17 @@ export default {
       default: '(int)您好'
     }
   },
-  setup() {
+  setup(props) {
     const isClick = ref(false)
+    const speech = new Speech()
+
+    const speak = () => {
+      speech.speak({ text: props.question })
+    }
 
     return {
-      isClick
+      isClick,
+      speak
     }
   }
 }
