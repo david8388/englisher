@@ -46,11 +46,20 @@
         ></flip-card>
         <br>
         <button
+          v-if="test.nowIdx < test.count"
           type="button"
           class="btn btn-secondary"
           @click="next"
         >
           Next question
+        </button>
+        <button
+          v-else
+          type="button"
+          class="btn btn-secondary"
+          @click="complete"
+        >
+          Complete
         </button>
       </div>
     </div>
@@ -68,41 +77,44 @@ export default {
     })
     const test = reactive({
       count: 0,
-      nowIdx: 0
+      nowIdx: 1
     })
     const question = ref('')
     const answer = ref('')
     const isShow = ref(false)
-    let idx = 0
 
     const isShowQuestionCard = computed(() => isShow.value)
 
     const next = () => {
-      if (idx < words.list.data.length) {
-        idx ++;
+      if (test.nowIdx < words.list.data.length) {
+        question.value = words.list.data[test.nowIdx].vocabulary
+        answer.value = words.list.data[test.nowIdx].expression
         test.nowIdx ++;
-        question.value = words.list.data[idx].vocabulary
-        answer.value = words.list.data[idx].expression
       }
     }
 
     const startTest = async () => {
       isShow.value = !isShow.value
+      test.nowIdx = 1
       words.list = await getRandomWords()
       test.count = words.list.data.length
       question.value = words.list.data[0].vocabulary
       answer.value = words.list.data[0].expression
     }
 
+    const complete = () => {
+      isShow.value = !isShow.value
+    }
+
     return {
-      idx,
       words,
       next,
       question,
       answer,
       isShowQuestionCard,
       startTest,
-      test
+      test,
+      complete
     }
   }
 }
