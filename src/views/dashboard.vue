@@ -31,6 +31,7 @@
 import { reactive, onMounted, ref } from 'vue';
 import { Grid } from 'ag-grid/main'
 import moment from 'moment'
+import { getTotal } from '../api/apiService';
 
 export default {
   setup() {
@@ -149,7 +150,7 @@ export default {
             fill: false
           }
         ])
-    onMounted(() => {
+    onMounted(async () => {
       data.list = []
       gridOptions.rowData = []
       Object.keys(localStorage)
@@ -168,6 +169,11 @@ export default {
             example
           })
         })
+
+      const { data: total } = await getTotal()
+      components[0].text = total
+      gridOptions.rowData = data
+
       const eGridDiv = document.querySelector('#myGrid');
       new Grid(eGridDiv, gridOptions);
       console.log('component is mounted!', data.list  )
