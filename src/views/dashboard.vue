@@ -31,7 +31,7 @@
 import { reactive, onMounted, ref } from 'vue';
 import { Grid } from 'ag-grid/main'
 import moment from 'moment'
-import { getTotal } from '../api/apiService';
+import { getTotal, getCreated } from '../api/apiService';
 
 export default {
   setup() {
@@ -173,6 +173,10 @@ export default {
       const { data: total } = await getTotal()
       components[0].text = total
       gridOptions.rowData = data
+
+      const {data: created } = await getCreated()
+      components[1].text = created
+
 
       const eGridDiv = document.querySelector('#myGrid');
       new Grid(eGridDiv, gridOptions);
