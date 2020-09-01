@@ -7,7 +7,10 @@
         <h5 class="card-title">Review</h5>
         <div class="form-group">
           <label>Number Of Questions</label>
-          <select class="form-control">
+          <select
+            class="form-control"
+            v-model="select"
+          >
             <option>10</option>
             <option>15</option>
             <option>20</option>
@@ -79,6 +82,7 @@ export default {
       count: 0,
       nowIdx: 1
     })
+    const select = ref(10)
     const question = ref('')
     const answer = ref('')
     const isShow = ref(false)
@@ -96,7 +100,7 @@ export default {
     const startTest = async () => {
       isShow.value = !isShow.value
       test.nowIdx = 1
-      words.list = await getRandomWords()
+      words.list = await getRandomWords(select.value)
       test.count = words.list.data.length
       question.value = words.list.data[0].vocabulary
       answer.value = words.list.data[0].expression
@@ -114,7 +118,8 @@ export default {
       isShowQuestionCard,
       startTest,
       test,
-      complete
+      complete,
+      select
     }
   }
 }
