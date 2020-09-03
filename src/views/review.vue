@@ -11,9 +11,12 @@
             class="form-control"
             v-model="select"
           >
-            <option>10</option>
-            <option>15</option>
-            <option>20</option>
+            <option
+              v-for="(option, index) in options"
+              :key="index"
+            >
+              {{ option }}
+            </option>
           </select>
         </div>
         <button
@@ -82,6 +85,14 @@ export default {
       count: 0,
       nowIdx: 1
     })
+
+    const options = reactive([
+      10,
+      20,
+      35,
+      50
+    ])
+
     const select = ref(10)
     const question = ref('')
     const answer = ref('')
@@ -119,7 +130,8 @@ export default {
       startTest,
       test,
       complete,
-      select
+      select,
+      options
     }
   }
 }
