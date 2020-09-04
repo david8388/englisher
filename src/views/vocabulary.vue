@@ -39,15 +39,13 @@
       class="form-inline"
       @submit.prevent="query"
     >
-      <div class="input-group mb-2 mr-sm-2">
+      <div
+        class="input-group mb-2 mr-sm-2"
+        v-for="(date, index) in dates"
+        :key="index"
+      >
         <div class="input-group-prepend">
-          <div class="input-group-text">StartDate</div>
-        </div>
-        <input type="date" class="form-control">
-      </div>
-      <div class="input-group mb-2 mr-sm-2">
-        <div class="input-group-prepend">
-          <div class="input-group-text">EndDate</div>
+          <div class="input-group-text">{{ date }}</div>
         </div>
         <input type="date" class="form-control">
       </div>
@@ -81,6 +79,8 @@ export default {
     const data= reactive({
       list: [{}]
     })
+
+    const dates = reactive(['StartDate', 'EndDate'])
 
     const isNumber = (val: any) => !isNaN(val)
 
@@ -138,7 +138,8 @@ export default {
       reset,
       save,
       data,
-      query
+      query,
+      dates
     }
   }
 }
