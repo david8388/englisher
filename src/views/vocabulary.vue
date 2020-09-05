@@ -82,8 +82,6 @@ export default {
 
     const dates = reactive(['StartDate', 'EndDate'])
 
-    const isNumber = (val: any) => !isNaN(val)
-
     function onRowValueChanged(params) {
       const {key, vocabulary, expression, example} = params.data
       const dataStr = JSON.stringify({vocabulary, expression, example})
